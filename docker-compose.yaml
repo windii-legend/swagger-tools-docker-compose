@@ -1,0 +1,25 @@
+swagger-editor:
+  image: swaggerapi/swagger-editor
+  container_name: "swagger-editor"
+  ports:
+    - "8001:8080"
+
+swagger-ui:
+  image: swaggerapi/swagger-ui
+  container_name: "swagger-ui"
+  ports:
+    - "8002:8080"
+  volumes:
+    - ./document/openapi.yaml:/openapi.yaml
+  environment:
+    SWAGGER_JSON: /openapi.yaml
+    # API_URL: ""
+
+swagger-api:
+  image: danielgtaylor/apisprout
+  container_name: "swagger-api"
+  ports:
+    - "8003:8000"
+  volumes:
+    - ./document/openapi.yaml:/openapi.yaml
+  command: /openapi.yaml
